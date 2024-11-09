@@ -9,4 +9,8 @@ router
 
 router.route("/confirm/:confirmationId").get(userController.confirmAccount);
 
+router.route("/login").post(userController.login);
+
+router.route("/verify").post(userController.verifyotp);
+
 module.exports = router;
