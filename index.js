@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDb = require("./utils/connectDb");
+const { connectDb, globalErrorHandler } = require("./utils");
 const morgan = require("morgan");
 
 const { userRouter } = require("./routes");
@@ -15,6 +15,8 @@ const PORT = process.env.PORT || 8080;
 process.env.NODE_ENV === "development" && app.use(morgan("dev"));
 
 app.use("/api/v1/users", userRouter);
+
+app.use("*", globalErrorHandler);
 
 app.listen(PORT, async () => {
   await connectDb();
